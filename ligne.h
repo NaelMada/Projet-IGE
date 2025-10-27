@@ -6,6 +6,6 @@ typedef struct _une_ligne {
     char *color; //La couleur de la ligne #RRGGBB
     float vitesse; //Vitesse moyenne des rames en km/h
     float intervalle; //Intervalle moyen entre 2 rames
-struct _une_ligne *suiv;} Une_ligne; 
+struct _une_ligne *suiv;} Une_ligne;
 
 #endif
