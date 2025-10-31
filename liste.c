@@ -61,3 +61,29 @@ void detruire_liste_et_truc(Un_elem *liste){
         tmp = liste;
     }
 }
+
+Un_elem *lire_stations( char *nom_fichier){
+    FILE *f = fopen(nom_fichier, "r");
+    int a = 0;
+    float lat;
+    float lon;
+    char nom_lecture[20];
+    Un_elem * head = NULL;
+    // %[^\n]s trouvé sur stack overflow pour lire une chaine de caractères avec espace
+    while(!fscanf(f, "%f;%f;%[^\n]s\n", &lon, &lat, nom_lecture)){
+        char *nom = malloc(sizeof(20));
+        strcpy(nom, nom_lecture);
+        Une_coord cord = {.lon = lon, .lat = lat};
+
+        Une_station station = {.nom = nom, .tab_con = NULL, .con_pcc = NULL, .nb_con = 0};
+
+        Tdata data;
+        data.sta = station;
+        
+        Un_truc *truc = creer_truc(cord, STA, data, 0);
+
+        head = inserer_liste_trie(head, truc);
+    }
+    fclose(f);
+    return head;
+}
