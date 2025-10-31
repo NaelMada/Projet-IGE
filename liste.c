@@ -37,7 +37,27 @@ void ecrire_liste( FILE *flux, Un_elem *liste){
         Tdata data;
         data.sta = station;
         
+        Un_truc *truc = creer_truc(cord, STA, data, 0);
+    }
+}
 
-        creer_truc(cord, STA, data, 0);
+void detruire_liste(Un_elem *liste){
+    Un_elem *tmp = liste;
+    while(tmp != NULL){
+        liste = liste->suiv;
+        tmp->suiv = NULL;
+        free(tmp);
+        tmp = liste;
+    }
+}
+
+void detruire_liste_et_truc(Un_elem *liste){
+    Un_elem *tmp = liste;
+    while(tmp != NULL){
+        liste = liste->suiv;
+        tmp->suiv = NULL;
+        detruire_truc(tmp->truc);
+        free(tmp);
+        tmp = liste;
     }
 }
